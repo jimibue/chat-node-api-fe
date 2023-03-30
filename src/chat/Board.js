@@ -15,8 +15,8 @@ export default function Board() {
       setMessages(newMessages);
       console.log("posting");
       let res = await axios.post(
-        // "https://gpt-node-api-jimibue.onrender.com/chat/multiple",
-        "http://localhost:8080/chat/multiple",
+        "https://gpt-node-api-jimibue.onrender.com/chat/multiple",
+        // "http://localhost:8080/chat/multiple",
         { messages: [...messages, { role: "user", content, }] }
       );
       setLoading(false)
