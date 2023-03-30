@@ -3,8 +3,8 @@ import { Link, Outlet } from "react-router-dom";
 export default function Root() {
     return (
       <>
-        <div id="sidebar">
-          <div>
+        <div id="sidebar" className="hide-mobile">
+          <div >
           <h1>React Router Contacts</h1>
             {/* <form id="search-form" role="search">
               <input

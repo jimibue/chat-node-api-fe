@@ -42,7 +42,7 @@ export default function Contact() {
             </p>
           )}
 
-          {contact.notes && <p>{contact.notes}</p>}
+          {contact.notes && <p class='hide-mobile'>{contact.notes}</p>}
         </div>
       </div>
       <div>
