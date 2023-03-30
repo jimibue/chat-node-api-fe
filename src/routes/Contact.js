@@ -1,4 +1,3 @@
-import { Form } from "react-router-dom";
 import Board from "../chat/Board";
 
 export default function Contact() {
@@ -16,7 +15,7 @@ export default function Contact() {
     <div>
       <div id="contact">
         <div>
-          <img key={contact.avatar} src={contact.avatar || null} />
+          <img alt='user img' key={contact.avatar} src={contact.avatar || null} />
         </div>
 
         <div style={{flex:1}}>
@@ -35,6 +34,7 @@ export default function Contact() {
             <p>
               <a
                 target="_blank"
+                rel='noreferrer'
                 href={`https://twitter.com/${contact.twitter}`}
               >
                 {contact.twitter}
@@ -52,18 +52,18 @@ export default function Contact() {
   );
 }
 
-function Favorite({ contact }) {
-  // yes, this is a `let` for later
-  let favorite = contact.favorite;
-  return (
-    <Form method="post">
-      <button
-        name="favorite"
-        value={favorite ? "false" : "true"}
-        aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
-      >
-        {favorite ? "★" : "☆"}
-      </button>
-    </Form>
-  );
-}
+// function Favorite({ contact }) {
+//   // yes, this is a `let` for later
+//   let favorite = contact.favorite;
+//   return (
+//     <Form method="post">
+//       <button
+//         name="favorite"
+//         value={favorite ? "false" : "true"}
+//         aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
+//       >
+//         {favorite ? "★" : "☆"}
+//       </button>
+//     </Form>
+//   );
+// }

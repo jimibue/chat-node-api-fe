@@ -31,8 +31,6 @@ export default function Board() {
   return (
     <div className="demo-component">
       <div>
-        <h1></h1>
-
         <div>
           {messages.length === 0 && <SingleMessage role='assistant' content='Hello my child, how may I help you?'/>}
           {messages.map((message, index) => (
