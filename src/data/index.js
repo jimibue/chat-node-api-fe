@@ -23,6 +23,18 @@ const SOCIALIZER = {
     
 }
 
-const contacts = [JESUS, SOCIALIZER]
+const QUERY_TEST = {
+    id:3,
+    first: "Query",
+    last: "Test",
+    openingMessage:'Hello, I am Query Test. Ask me a question',
+    apiPath:'chat/query',
+    imgSrc:
+    "https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/cyrano-de-bergerac-andrew-howat.jpg",
+    notes:'Test queries',
+    
+}
+
+const contacts = [JESUS, SOCIALIZER, QUERY_TEST]
 
 export default contacts
