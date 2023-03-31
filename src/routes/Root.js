@@ -1,4 +1,5 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import ContactsList from "../components/nav/ContactsList";
 
 export default function Root() {
     return (
@@ -29,14 +30,7 @@ export default function Root() {
             </form> */}
           </div>
           <nav>
-            <ul>
-              <li>
-                <Link to={`/contacts/1`}>Jesus Christ</Link>
-              </li>
-              <li>
-                <Link to={`/contacts/2`}>Chuck Norris</Link>
-              </li>
-            </ul>
+            <ContactsList />
           </nav>
         </div>
         <div id="detail">

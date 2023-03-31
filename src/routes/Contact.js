@@ -1,21 +1,30 @@
+import { useParams } from "react-router-dom";
 import Board from "../chat/Board";
+import contacts from "../data";
+import { useEffect, useState } from "react";
+const defaultContact = {
+  first: "DEFAULT",
+  last: "DEFAULT",
+  avatar:
+    "https://i.etsystatic.com/25672526/r/il/9926ae/4736624079/il_1588xN.4736624079_o07h.jpg",
+  twitter: "jesus@christ.com",
+  notes: "Jesus",
+  favorite: false,
+};
 
 export default function Contact() {
-  const contact = {
-    first: "Jesus",
-    last: "Christ",
-    avatar:
-      "https://i.etsystatic.com/25672526/r/il/9926ae/4736624079/il_1588xN.4736624079_o07h.jpg",
-    twitter: "jesus@christ.com",
-    notes: "Jesus is a life coach who helps people find fulfillment through the teachings of Christianity. He emphasizes forgiveness, love, and guidance from God. Through his teachings, Jesus provides a roadmap for personal growth and spiritual fulfillment that's inspiring and transformative for individuals worldwide",
-    favorite: false,
-  };
-
+  const id = parseInt(useParams().id);
+  const [contact,setContact] = useState({})
+  useEffect(() => {
+     const c = contacts.find(c=>c.id === id) || defaultContact;
+     setContact(c)
+  }, [id])
+  
   return (
     <div>
       <div id="contact">
         <div>
-          <img alt='user img' key={contact.avatar} src={contact.avatar || null} />
+          <img alt='user img' key={contact.imgSrc} src={contact.imgSrc || null} />
         </div>
 
         <div style={{flex:1}}>
@@ -27,26 +36,25 @@ export default function Contact() {
             ) : (
               <i>No Name</i>
             )}{" "}
-            {/* <Favorite contact={contact} /> */}
           </h1>
 
-          {contact.twitter && (
+          {/* {contact.twitter && (
             <p>
               <a
                 target="_blank"
                 rel='noreferrer'
                 href={`https://twitter.com/${contact.twitter}`}
               >
-                {contact.twitter}
+                about
               </a>
             </p>
-          )}
+          )} */}
 
-          {contact.notes && <p class='hide-mobile'>{contact.notes}</p>}
+          {contact.notes && <p className='hide-mobile'>{contact.notes}</p>}
         </div>
       </div>
       <div>
-        <Board />
+        <Board contact={contact} />
       </div>
     </div>
   );

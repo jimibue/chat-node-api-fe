@@ -1,48 +1,36 @@
-import React from "react";
-import axios from "axios";
-import SingleMessage from "./SingleMessage";
+// Board.js
+import React, { useState } from "react";
+import { fetchCompletion } from "../helpers/api";
+import MessageList from "./MessageList";
 
-export default function Board() {
-  const [content, setContent] = React.useState("");
-  const [messages, setMessages] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
+export default function Board({contact}) {
+  const [content, setContent] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setContent("");
+
+    const userMessage = { role: "user", content };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+
     try {
-      setLoading(true)
-      setContent('')
-      let newMessages = [...messages, { role: "user", content, }];
-      setMessages(newMessages);
-      console.log("posting");
-      let res = await axios.post(
-        "https://gpt-node-api-jimibue.onrender.com/chat/multiple",
-        // "http://localhost:8080/chat/multiple",
-        { messages: [...messages, { role: "user", content, }] }
-      );
-      setLoading(false)
-      console.log("res:", res);
-      
-      setMessages([...newMessages, res.data.completion]);
+      const completion = await fetchCompletion([...messages, userMessage], contact.apiPath);
+      setLoading(false);
+      setMessages((prevMessages) => [...prevMessages, completion]);
     } catch (error) {
-      console.log("ERROR");
-      console.log(error);
+      setLoading(false);
+      console.error("ERROR:", error);
     }
   };
+
   return (
     <div className="demo-component">
       <div>
-        <div>
-          {messages.length === 0 && <SingleMessage role='assistant' content='Hello my child, how may I help you?'/>}
-          {messages.map((message, index) => (
-            <SingleMessage   key={index} {...message} />
-          ))}
-          {loading && <SingleMessage role='assistant' content={null}/>}
-       
-        </div>
+      <MessageList contact={contact} messages={messages} loading={loading} />
 
-        {/* <ul className="messages">
-    
-      </ul> */}
         <form onSubmit={handleSubmit}>
           <input
             type="text"
