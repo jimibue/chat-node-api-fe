@@ -1,22 +1,14 @@
 import { useParams } from "react-router-dom";
 import Board from "../chat/Board";
-import contacts from "../data";
-import { useEffect, useState } from "react";
-const defaultContact = {
-  first: "DEFAULT",
-  last: "DEFAULT",
-  avatar:
-    "https://i.etsystatic.com/25672526/r/il/9926ae/4736624079/il_1588xN.4736624079_o07h.jpg",
-  twitter: "jesus@christ.com",
-  notes: "Jesus",
-  favorite: false,
-};
+import { useContext, useEffect, useState } from "react";
+import { ChatContext } from "../providers/ChatProvider";
 
 export default function Contact() {
-  const id = parseInt(useParams().id);
+  const id = parseInt(useParams().id||1);
+  const {contacts} = useContext(ChatContext)
   const [contact,setContact] = useState({})
   useEffect(() => {
-     const c = contacts.find(c=>c.id === id) || defaultContact;
+     const c = contacts.find(c=>c.id === id);
      setContact(c)
   }, [id])
   
@@ -50,7 +42,7 @@ export default function Contact() {
             </p>
           )} */}
 
-          {contact.notes && <p className='hide-mobile'>{contact.notes}</p>}
+          {contact.system && <p className='hide-mobile'>{contact.system}</p>}
         </div>
       </div>
       <div>
